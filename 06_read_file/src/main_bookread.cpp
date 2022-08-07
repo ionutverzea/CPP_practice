@@ -35,7 +35,7 @@ public:
 std::vector<Book> readBooksFromTextFile(const std::string& file_name)
 {
 	std::vector<Book> results;
-	// TODO: BEGIN read the file -------------------------------------
+	// TODO: BEGIN read the file ----------------------------------------
 	std::ifstream input;
 	input.open(file_name);
 
