@@ -12,17 +12,25 @@ private:
 	size_t line_count;
 
 	// TODO: store the data
+	std::vector<std::vector<char>> mat;
 	// hints: you can use std::string, std::vectors + string, char**, vector<vector<char>>, etc
 public:
 	Matrix(size_t numColumnsX, size_t numLinesY)
 		// TODO: add functionality
 	{
+		column_count = numColumnsX;
+		line_count = numLinesY;
+		int* data = new int(numColumnsX * numLinesY);
 		// TODO: add functionality
 	}
 
 	// Set an entire line
 	void setLine(size_t line_number, const std::string& data)
 	{
+		for (size_t i = 0; i < line_number; i++) {
+			i++;
+			mat[i];
+		}
 	}
 
 	//OPTIONAL
