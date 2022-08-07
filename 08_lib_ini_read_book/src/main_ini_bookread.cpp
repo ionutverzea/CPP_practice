@@ -15,11 +15,13 @@
 class Book
 {
 public:
+	int conter;
 	std::string name;
 	std::string authors;
 
 	void print()
 	{
+		std::cout << this->conter << std::endl;
 		std::cout << this->name << std::endl;
 		std::cout << "\t(by " << this->authors << ")" << std::endl;
 	}
@@ -47,7 +49,20 @@ std::vector<Book> readBooksFromIniFile(const std::string& file_name)
 {
 	std::vector<Book> results;
 	// TODO: BEGIN read the file -------------------------------------
-	
+	CSimpleIniA ini;
+	ini.SetUnicode();
+	SI_Error rc = ini.LoadFile("../../data/ermahgerd_berks.ini");
+	if (rc < 0) { /* handle error */ };
+	{
+
+	const char* pv;
+	pv = ini.GetValue("book", "key", "default");
+
+	ini.SetValue("book", "key", "newvalue");
+
+	pv = ini.GetValue("book", "key", "default");
+}
+
 	// E.g. Book myBook;
 	//		// build the section name (E.g. book.1)
 	//		std::stringstream ss;
@@ -57,6 +72,23 @@ std::vector<Book> readBooksFromIniFile(const std::string& file_name)
 
 	//		...
 	//		results.emplace_back(myBook);
+
+	Book myBook;
+	int i = 0;
+	int contor;
+	std::stringstream ss;
+	for (int i = 0; i <= 4; i++)
+	{
+		myBook.conter = i + 1;
+		ss << "book." << (i + 1);
+		std::string& section_name = std::string(ss.str());
+		const char* css = section_name.c_str();
+
+		myBook.name = ini.GetValue(css, "name", " ");
+		myBook.authors = ini.GetValue(css, "author", " ");
+	}
+	
+	std::string book(ss.str());
 
 	// TODO: END read file and add to results vector ------------------
 	return results;
@@ -68,10 +100,10 @@ int main()
 	// Using the SimpleINI C++ Lib: https://github.com/brofield/simpleini
 
 	// Read the data
-	std::string input_data("PATH_TO_INI_FILE.ini");
+	std::string input_data("../../data/ermahgerd_berks.ini");
 	std::cout << "Reading the data from " << input_data << std::endl;
 	std::vector<Book> books_from_file = readBooksFromIniFile(input_data);
-
+	
 	// Print the data
 	std::cout << "Here are all the books found in the data file..." << std::endl;
 	for (auto book : books_from_file)
