@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\rober\source\repos\RobertGTR\CPP_practice\04_display_book\src\main_books.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\rober\source\repos\RobertGTR\CPP_practice\04_display_book\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{F90F3849-29DF-3170-96E6-8D3EBFE2DF97}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
