@@ -1,0 +1,3 @@
+C:/Users/rober/source/repos/RobertGTR/CPP_practice/build/05_DucaRobert/CMakeFiles/05_DucaRobert.dir
+C:/Users/rober/source/repos/RobertGTR/CPP_practice/build/05_DucaRobert/CMakeFiles/ALL_BUILD.dir
+C:/Users/rober/source/repos/RobertGTR/CPP_practice/build/05_DucaRobert/CMakeFiles/ZERO_CHECK.dir
