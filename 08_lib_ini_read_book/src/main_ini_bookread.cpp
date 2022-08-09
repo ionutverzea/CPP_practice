@@ -1,4 +1,5 @@
 // Includes
+//#define val_max 10; 
 
 // C++ system headers
 #include <iostream>
@@ -15,15 +16,20 @@
 class Book
 {
 public:
-	int conter;
+	int contor;
+	std::string count;
 	std::string name;
 	std::string authors;
 
+	void printFirst() {          //first section
+		std::cout << "[books]\n";
+		std::cout << "count=" << this->count << std::endl << "\n";;
+	}
 	void print()
 	{
-		std::cout << this->conter << std::endl;
-		std::cout << this->name << std::endl;
-		std::cout << "\t(by " << this->authors << ")" << std::endl;
+		std::cout << "[book." << this->contor << "]\n";
+		std::cout << "name=" << this->name << std::endl;
+		std::cout << "author=" << this->authors << std::endl << "\n";
 	}
 };
 
@@ -47,21 +53,7 @@ public:
 */
 std::vector<Book> readBooksFromIniFile(const std::string& file_name)
 {
-	std::vector<Book> results;
 	// TODO: BEGIN read the file -------------------------------------
-	CSimpleIniA ini;
-	ini.SetUnicode();
-	SI_Error rc = ini.LoadFile("../../data/ermahgerd_berks.ini");
-	if (rc < 0) { /* handle error */ };
-	{
-
-	const char* pv;
-	pv = ini.GetValue("book", "key", "default");
-
-	ini.SetValue("book", "key", "newvalue");
-
-	pv = ini.GetValue("book", "key", "default");
-}
 
 	// E.g. Book myBook;
 	//		// build the section name (E.g. book.1)
@@ -73,22 +65,37 @@ std::vector<Book> readBooksFromIniFile(const std::string& file_name)
 	//		...
 	//		results.emplace_back(myBook);
 
+	std::vector<Book> results;
 	Book myBook;
-	int i = 0;
-	int contor;
-	std::stringstream ss;
-	for (int i = 0; i <= 4; i++)
-	{
-		myBook.conter = i + 1;
-		ss << "book." << (i + 1);
-		std::string& section_name = std::string(ss.str());
+
+	CSimpleIniA ini_file;
+	ini_file.SetUnicode();
+	if (ini_file.LoadFile("../../data/ermahgerd_berks.ini") < 0)
+		std::cout << "Could not open the file!\n";
+
+	// So far this is the only way I have managed to solve this
+	// Probably it could have been done easier
+
+	const char* str = "books";  //the name given in the e.g.;
+	myBook.count = ini_file.GetValue(str, "count", "def"); //getting the number of books writen in the file
+	myBook.printFirst();     //printing the first section but not where I want it
+
+	int countInt = stoi(myBook.count); //converting to integer to use the value below, in the loop
+
+	std::stringstream ss[10];  //I tried std::stringstream ss[val_max] or ss[countInt] => error 	
+
+	for (int i = 0; i < countInt; i++) {
+
+		ss[i] << "book." << (i + 1);
+		std::string& section_name = ss[i].str();
 		const char* css = section_name.c_str();
 
-		myBook.name = ini.GetValue(css, "name", " ");
-		myBook.authors = ini.GetValue(css, "author", " ");
+		myBook.contor = i + 1;  //[book.i]
+		myBook.name = ini_file.GetValue(css, "name", "def");
+		myBook.authors = ini_file.GetValue(css, "author", "def");
+
+		results.emplace_back(myBook);
 	}
-	
-	std::string book(ss.str());
 
 	// TODO: END read file and add to results vector ------------------
 	return results;
@@ -103,9 +110,13 @@ int main()
 	std::string input_data("../../data/ermahgerd_berks.ini");
 	std::cout << "Reading the data from " << input_data << std::endl;
 	std::vector<Book> books_from_file = readBooksFromIniFile(input_data);
-	
+
 	// Print the data
-	std::cout << "Here are all the books found in the data file..." << std::endl;
+	std::cout << "Here are all the books found in the data file...\n" << std::endl;
+
+	//Book book;
+	//book.printFirst(); //not ok, something is missing 
+
 	for (auto book : books_from_file)
 	{
 		book.print();
