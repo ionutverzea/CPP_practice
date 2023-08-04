@@ -1,8 +1,13 @@
 #include "Algorithms.h"
+#include "../MemoryManagement/MemoryManagement.h"
 #include <iostream>
 
 void main()
 {
+	myPointers();
+
+	myMatrix();
+
 	workingWithStructs();
 
 	if (JumpConditions())
