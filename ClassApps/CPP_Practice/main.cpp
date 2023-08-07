@@ -11,6 +11,7 @@ void main()
 	myPerson.setPerson("Ion", "Popescu", 22);
 
 	std::cout << myPerson.getName();
+	myPerson.setAge(-1);
 
 	// Class 3
 	myPointers();
