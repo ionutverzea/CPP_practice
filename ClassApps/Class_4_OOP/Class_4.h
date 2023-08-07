@@ -1,5 +1,12 @@
 #pragma once
 #include <string>
+#include <iostream>
+
+// best practice for includes:
+/*
+*	headers include only the files they are actively using
+*	sources include all they need to do the implementation
+*/
 
 // export functions and data from library
 #ifdef Class_4_OOP_EXPORT
@@ -16,6 +23,7 @@ private:
 	std::string mName;
 	std::string mSurname;
 	int mAge;
+	myLogger logger;
 public:
 	Person()
 	{
@@ -34,3 +42,42 @@ public:
 };
 
 
+// implement simple logger class to be used in above example
+
+enum class Class_4_API LOG_LEVEL { INFO = 0, WARN, ERROR, DEBUG };
+enum class Class_4_API LOG_OUTPUT {CONSOLE, FILE, NONE };
+// ideas to learn through logger app:
+// operator overloading
+// would need a single instance of logger class - singleton pattern https://refactoring.guru/design-patterns/singleton/cpp/example
+// - implement specific methods
+class Class_4_API myLogger
+{
+private:
+	LOG_LEVEL mLogLevel;
+	LOG_OUTPUT mLogOutput;
+	std::string mLogFile = "";
+	bool success = false;
+	int sLogIndex;			// homework - do something about this, use as static 
+public:
+	myLogger()
+	{
+		mLogLevel = LOG_LEVEL::INFO;
+		mLogOutput = LOG_OUTPUT::CONSOLE;
+		sLogIndex = 0;
+	}
+	myLogger(std::string logFilePath)
+	{
+		myLogger();
+		this->mLogFile = logFilePath;
+	}
+
+	// homework : 
+	std::ostream& operator<< (std::ostream& out)
+	{
+		out << "(" << __FILE__ << ", "
+			<< __FUNCTION__ << ", "
+			<< __LINE__ << ")";
+		return out;
+	}
+
+};
