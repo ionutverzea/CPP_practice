@@ -1,11 +1,36 @@
 #include "Algorithms.h"
 #include "../MemoryManagement/MemoryManagement.h"
 #include "../Class_4_OOP/Class_4.h"
+#include "../Class_6/Class_6.h"
 
 #include <iostream>
 
+using namespace myCustomNamespace;
+
 void main()
 {
+	// Class 6
+	/*
+
+	c-strings vs. std::strings	
+	String Initialization	
+
+	Useful Methods	
+	String Operations	
+
+	Iterators	
+	Vector	
+	String	
+	Map	
+	Methods	
+	STL and Polymorphism - casting up/down
+	*/
+	myCustomNamespace::mapOperations();
+	vectorOperations();
+	stringInitialisation();
+
+	return;
+
 	// Class 4
 	Person myPerson;
 	myPerson.setPerson("Ion", "Popescu", 22);
